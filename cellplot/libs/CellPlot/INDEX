@@ -1,7 +1,0 @@
-CellPlot-package        Package CellPlot
-arc.plot                Arc Plot
-cell.plot               Cell Plot
-go.histogram            GO Histogram
-leukemiasGO             Gene ontology term enrichment of differential
-                        gene expression of leukemia samples
-sym.plot                Sym Plot
