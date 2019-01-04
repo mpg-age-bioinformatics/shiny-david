@@ -63,7 +63,7 @@ shinyUI( fluidPage(
                                                                                 'comma-seperated' = ',', 
                                                                                 'semicolon-separated' = ';'), inline = TRUE),
       checkboxInput("header", "Header", TRUE),
-      a(href = "https://github.com/mpg-age-bioinformatics/shiny/raw/master/david/genes.xlsx", "Example input"),
+      a(href = "https://github.com/mpg-age-bioinformatics/shiny-david/raw/master/genes.xlsx", "Example input"),
       br(),br(),
       textInput("outfile", "Output file name", value="DAVIDws")
       ),
