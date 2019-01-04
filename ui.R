@@ -77,7 +77,7 @@ shinyUI( fluidPage(
       helpText("Please make sure you've registered your email ", a(href = "https://david.ncifcrf.gov/webservice/register.htm", "here" ),"." )
       ),
     column(4,
-      selectInput("gene_ontology_in", "Gene ontology", choices = c('none',gene_ontology), multiple = TRUE, selected='GOTERM_BP_FAT'),
+      selectInput("gene_ontology_in", "Gene ontology", choices = c('none',gene_ontology), multiple = TRUE, selected=c('GOTERM_BP_FAT','GOTERM_MF_FAT','GOTERM_CC_FAT') ),
       selectInput("protein_domains_in", "Protein domains", choices = c('none',protein_domains), multiple = TRUE, selected='none'),
       selectInput("pathways_in", "Pathways", choices = c('none',pathways), multiple = TRUE, selected='none'),
       selectInput("general_annotations_in", "General annotations", choices = c('none',general_annotations), multiple = TRUE, selected='none'),

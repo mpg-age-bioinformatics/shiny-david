@@ -112,17 +112,23 @@ shinyServer(function(input, output, session) {
     
     if (is.null(inFile))
       return(NULL)
+    progress <- Progress$new(session, min=1, max=5)
+    on.exit(progress$close())
+    
+    progress$set(message = 'Working', detail = 'Reading input files ..', value=2)
     tmp<-target.genes()
     tmp<-background()
     
     req(input$registeredmail)
     
+    progress$set(message = 'Working', detail = 'Connecting to DAVID ..', value=3)
     david<-DAVIDWebService$new(email=input$registeredmail,url="https://david.ncifcrf.gov/webservice/services/DAVIDWebService.DAVIDWebServiceHttpSoap12Endpoint/")
     
     categories<-getcats()
     
     setAnnotationCategories(david, categories)
     
+    progress$set(message = 'Working', detail = 'Uploading lists ..', value=4)
     result<-addList(david, target.genes(),
                     idType=input$genes_list_id,
                     listName="target_genes", listType="Gene")
@@ -159,6 +165,8 @@ shinyServer(function(input, output, session) {
                   "Not mapped background genes: ", background_unmapped)
       
     }
+    progress$set(message = 'Finished', detail = NULL, value=5)
+    
     return(rep)
   })
     
@@ -172,12 +180,16 @@ shinyServer(function(input, output, session) {
       
       if (is.null(inFile))
         return(NULL)
+      progress <- Progress$new(session, min=1, max=4)
+      on.exit(progress$close())
 
+      progress$set(message = 'Working', detail = 'Connecting to DAVID ..', value=2)
       david<-DAVIDWebService$new(email=input$registeredmail,url="https://david.ncifcrf.gov/webservice/services/DAVIDWebService.DAVIDWebServiceHttpSoap12Endpoint/")
       categories<-getcats()
 
       setAnnotationCategories(david, categories)
 
+      progress$set(message = 'Working', detail = 'Uploading lists ..', value=3)
       result<-addList(david, target.genes(),
                       idType=input$genes_list_id,
                       listName="target_genes", listType="Gene")
@@ -201,7 +213,7 @@ shinyServer(function(input, output, session) {
 
       getClusterReportFile(david, type="Term", fileName=file)
       #getFunctionalAnnotationChartFile(david, fileName=file)
-      
+      progress$set(message = 'Finished', detail = NULL, value=4)
     }
   )
   
@@ -214,11 +226,16 @@ shinyServer(function(input, output, session) {
       
       if (is.null(inFile))
         return(NULL)
+      progress <- Progress$new(session, min=1, max=4)
+      on.exit(progress$close())
       
+      progress$set(message = 'Working', detail = 'Connecting to DAVID ..', value=2)
       david<-DAVIDWebService$new(email=input$registeredmail,url="https://david.ncifcrf.gov/webservice/services/DAVIDWebService.DAVIDWebServiceHttpSoap12Endpoint/")
       categories<-getcats()
       
       setAnnotationCategories(david, categories)
+      
+      progress$set(message = 'Working', detail = 'Uploading lists ..', value=3)
       
       result<-addList(david, target.genes(),
                       idType=input$genes_list_id,
@@ -243,6 +260,7 @@ shinyServer(function(input, output, session) {
       
       #getClusterReportFile(david, type="Term", fileName=file)
       getFunctionalAnnotationChartFile(david, fileName=file)
+      progress$set(message = 'Finished', detail = NULL, value=4)
     }
   )
   
