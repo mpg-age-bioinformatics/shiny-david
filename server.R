@@ -10,6 +10,8 @@ library(shiny)
 library(xlsx)
 library(RDAVIDWebService)
 
+options(java.parameters = "-Xmx10240m")
+
 #     genes_list genes_list_id background_list background_list_id registeredmail gene_ontology_in protein_domains_in pathways_in general_annotations_in functional_categories_in protein_protein_interactions_in literature_in disease_in
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -173,7 +175,7 @@ shinyServer(function(input, output, session) {
   
   output$downloadTable <- downloadHandler(
     filename = function() {
-      paste(input$outfile,".ClusterReport.",gitversion(),".csv", sep = "")
+      paste(input$outfile,".ClusterReport.",gitversion(),".tsv", sep = "")
     },
     content = function(file) {
       inFile <- input$file1
@@ -219,7 +221,7 @@ shinyServer(function(input, output, session) {
   
   output$FunctionalAnnotation <- downloadHandler(
     filename = function() {
-      paste(input$outfile,".FunctionalAnnotation.",gitversion(),".csv", sep = "")
+      paste(input$outfile,".FunctionalAnnotation.",gitversion(),".tsv", sep = "")
     },
     content = function(file) {
       inFile <- input$file1
