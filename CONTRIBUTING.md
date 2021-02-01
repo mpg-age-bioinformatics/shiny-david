@@ -31,10 +31,8 @@ git add .
 git commit -m "<describe your changes here>"
 git push origin HEAD:master
 ```
-And then tell the main project to start tracking the updated version:
-```bash
-cd ~/shiny
-git add david
-git commit -m david
-git push
+Adding a tag:
+```
+git tag -e -a <major>.<minor>.<patch> HEAD
+git push origin --tags
 ```
